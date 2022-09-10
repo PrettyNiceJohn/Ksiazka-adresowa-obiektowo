@@ -4,8 +4,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>104</x>
-      <y>0</y>
+      <x>192</x>
+      <y>152</y>
       <w>240</w>
       <h>224</h>
     </coordinates>
@@ -15,7 +15,8 @@
 --
 KsiazkaAdresowa();
 + rejestracjaUzytkownika() : void
-+ wypiszWszystkichUzytkownikow() : void
++ logowanieUzytkownika() : void
++ wybierzOpcjeZMenuGlownego();
 
 </panel_attributes>
     <additional_attributes/>
@@ -23,10 +24,10 @@ KsiazkaAdresowa();
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>616</x>
-      <y>320</y>
+      <x>464</x>
+      <y>160</y>
       <w>136</w>
-      <h>136</h>
+      <h>64</h>
     </coordinates>
     <panel_attributes>Uzytkownik
 --
@@ -38,8 +39,8 @@ KsiazkaAdresowa();
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>440</x>
-      <y>0</y>
+      <x>520</x>
+      <y>248</y>
       <w>240</w>
       <h>224</h>
     </coordinates>
@@ -53,16 +54,18 @@ KsiazkaAdresowa();
 + wczytajUzytkownikowZPliku() : void
 - podajDaneNowegoUzytkownika() : Uzytkownik
 - pobierzIdNowegoUzytkownika() : Integer
-- czyIstniejeLogin() : Bool</panel_attributes>
+- czyIstniejeLogin() : Bool
+- zmieńHasło() : void
++ wylogowanie : void</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>280</x>
-      <y>504</y>
-      <w>432</w>
-      <h>104</h>
+      <x>792</x>
+      <y>368</y>
+      <w>264</w>
+      <h>136</h>
     </coordinates>
     <panel_attributes>PlikZUzytkownikami
 --
@@ -79,15 +82,17 @@ KsiazkaAdresowa();
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>128</x>
-      <y>328</y>
-      <w>128</w>
-      <h>56</h>
+      <x>1112</x>
+      <y>48</y>
+      <w>176</w>
+      <h>112</h>
     </coordinates>
     <panel_attributes>MetodyPomocnicze
 --
 --
-+ konwersjaIntNaString() : String</panel_attributes>
++ konwersjaIntNaString() : String
++ wczytajZnak() : Character
++ wczytajLinie() : String</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>
