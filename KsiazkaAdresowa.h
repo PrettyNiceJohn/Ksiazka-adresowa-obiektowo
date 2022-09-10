@@ -13,7 +13,10 @@ public:
         uzytkownikMenedzer.wczytajUzytkownikowZPliku();
     };
     void rejestracjaUzytkownika();
-    void wypiszWszystkichUzytkownikow();
+    int  logowanieUzytkownika();
+    char wybierzOpcjeZMenuGlownego();
+    char wybierzOpcjeZMenuUzytkownika();
+    void zmianaHaslaZalogowanegoUzytkownika(int idZalogowanegoUzytkownika);
 };
 
 #endif
