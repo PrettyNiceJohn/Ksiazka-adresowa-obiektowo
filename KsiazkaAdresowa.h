@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include "UzytkownikMenedzer.h"
+#include "AdresatMenedzer.h"
 
 using namespace std;
 
@@ -14,9 +15,10 @@ public:
     };
     void rejestracjaUzytkownika();
     int  logowanieUzytkownika();
+    void zmianaHaslaZalogowanegoUzytkownika(int idZalogowanegoUzytkownika);
     char wybierzOpcjeZMenuGlownego();
     char wybierzOpcjeZMenuUzytkownika();
-    void zmianaHaslaZalogowanegoUzytkownika(int idZalogowanegoUzytkownika);
+    int wylogowanieUzytkownika(vector<Adresat> &adresaci);
 };
 
 #endif
