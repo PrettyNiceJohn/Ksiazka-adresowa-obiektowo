@@ -1,13 +1,15 @@
 #include <iostream>
 #include "KsiazkaAdresowa.h"
+#include "AdresatMenedzer.h"
 
 using namespace std;
 
 int main() {
     KsiazkaAdresowa ksiazkaAdresowa("Uzytkownicy.txt");
+    AdresatMenedzer adresatMenedzer("Adresaci.txt");
+    vector<Adresat> adresaci;
     int idZalogowanegoUzytkownika = 0;
     int idOstatniegoAdresata = 0;
-    int idUsunietegoAdresata = 0;
     char wybor;
 
     while (true) {
@@ -30,15 +32,14 @@ int main() {
                 break;
             }
         } else {
-
-            //if (adresaci.empty() == true)
-                //idOstatniegoAdresata = wczytajAdresatowZalogowanegoUzytkownikaZPliku(adresaci, idZalogowanegoUzytkownika);
-
-                wybor = ksiazkaAdresowa.wybierzOpcjeZMenuUzytkownika();
+            if (adresaci.empty() == true){
+                idOstatniegoAdresata = adresatMenedzer.wczytajAdresatowZalogowanegoUzytkownikaZPliku(adresaci, idZalogowanegoUzytkownika);
+            }
+            wybor = ksiazkaAdresowa.wybierzOpcjeZMenuUzytkownika();
 
             switch (wybor) {
             case '1':
-                //idOstatniegoAdresata = dodajAdresata(adresaci, idZalogowanegoUzytkownika, idOstatniegoAdresata);
+                idOstatniegoAdresata = adresatMenedzer.dodajAdresata(adresaci, idZalogowanegoUzytkownika, idOstatniegoAdresata);
                 break;
             case '2':
                 //wyszukajAdresatowPoImieniu(adresaci);
@@ -47,7 +48,7 @@ int main() {
                 //wyszukajAdresatowPoNazwisku(adresaci);
                 break;
             case '4':
-                //wyswietlWszystkichAdresatow(adresaci);
+                adresatMenedzer.wyswietlWszystkichAdresatow(adresaci);
                 break;
             case '5':
                 //idUsunietegoAdresata = usunAdresata(adresaci);
@@ -60,8 +61,7 @@ int main() {
                 ksiazkaAdresowa.zmianaHaslaZalogowanegoUzytkownika(idZalogowanegoUzytkownika);
                 break;
             case '8':
-                idZalogowanegoUzytkownika = 0;
-                //adresaci.clear();
+                idZalogowanegoUzytkownika = ksiazkaAdresowa.wylogowanieUzytkownika(adresaci);
                 break;
             }
         }

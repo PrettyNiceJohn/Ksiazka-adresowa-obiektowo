@@ -46,6 +46,11 @@ char KsiazkaAdresowa::wybierzOpcjeZMenuUzytkownika() {
     return wybor;
 }
 
-void KsiazkaAdresowa::zmianaHaslaZalogowanegoUzytkownika(int idZalogowanegoUzytkownika){
+void KsiazkaAdresowa::zmianaHaslaZalogowanegoUzytkownika(int idZalogowanegoUzytkownika) {
     uzytkownikMenedzer.zmianaHaslaZalogowanegoUzytkownika(idZalogowanegoUzytkownika);
+}
+
+int KsiazkaAdresowa::wylogowanieUzytkownika(vector<Adresat> &adresaci){
+    adresaci.clear();
+    return 0;
 }
