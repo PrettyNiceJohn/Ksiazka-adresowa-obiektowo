@@ -14,6 +14,15 @@ class Adresat {
     string email;
     string adres;
 public:
+    Adresat(int id = 0, int idUzytkownika = 0, string imie = "", string nazwisko = "", string numerTelefonu = "", string email = "", string adres = ""){
+        this -> id = id;
+        this -> idUzytkownika = idUzytkownika;
+        this -> imie = imie;
+        this -> nazwisko = nazwisko;
+        this -> numerTelefonu = numerTelefonu;
+        this -> email = email;
+        this -> adres = adres;
+    }
     void ustawId(int noweId);
     void ustawIdUzytkownika(int idZalogowanegoUzytkownika);
     void ustawImie(string noweImie);
