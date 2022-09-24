@@ -73,10 +73,18 @@ void KsiazkaAdresowa::wyswietlWszystkichAdresatow() {
     adresatMenedzer -> wyswietlWszystkichAdresatow();
 }
 
-bool KsiazkaAdresowa::czyUzytkownikJestZalogowany(){
-    if (uzytkownikMenedzer.czyUzytkownikJestZalogowany()){
+bool KsiazkaAdresowa::czyUzytkownikJestZalogowany() {
+    if (uzytkownikMenedzer.czyUzytkownikJestZalogowany()) {
         return true;
     } else {
         return false;
     }
+}
+
+void KsiazkaAdresowa::wyszukajAdresatowPoImieniu() {
+    adresatMenedzer -> wyszukajAdresatowPoImieniu();
+}
+
+void KsiazkaAdresowa::wyszukajAdresatowPoNazwisku() {
+    adresatMenedzer -> wyszukajAdresatowPoNazwisku();
 }
