@@ -23,6 +23,8 @@ KsiazkaAdresowa()
 + wybierzOpcjeZMenuUzytkownika() : Character
 + dodajAdresata() : void
 + wyswietlWszystkichAdresatow() : void 
++ wyszukajAdresatowPoImieniu() : void
++ wyszukajAdresatowPoNazwisku() : void
 + ustawIdZalogowanegoUzytkownika() : void 
 + zmianaHaslaZalogowanegoUzytkownika() : void 
 + wylogowanieUzytkownika() : void 
@@ -151,11 +153,13 @@ Adresat()</panel_attributes>
 - podajDaneNowegoAdresata() : Adresat
 - PlikZAdresatami : plikZAdresatami
 - wyswietlDaneAdresata() : void
+- wyswietlIloscWyszukanychAdresatow(int iloscAdresatow);
 --
 AdresatMenedzer()
 + dodajAdresata() : Integer
 + wyswietlWszystkichAdresatow() : void
-</panel_attributes>
++ wyszukajAdresatowPoImieniu() : void
++ wyszukajAdresatowPoNazwisku() : void</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
