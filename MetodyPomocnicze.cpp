@@ -6,6 +6,7 @@ string MetodyPomocnicze::konwerjsaIntNaString(int liczba) {
     string str = ss.str();
     return str;
 }
+
 string MetodyPomocnicze::wczytajLinie() {
     string wejscie = "";
     getline(cin, wejscie);
@@ -44,6 +45,7 @@ string MetodyPomocnicze::pobierzLiczbe(string tekst, int pozycjaZnaku) {
     }
     return liczba;
 }
+
 int MetodyPomocnicze::konwersjaStringNaInt(string liczba) {
     int liczbaInt;
     istringstream iss(liczba);

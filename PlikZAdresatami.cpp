@@ -63,6 +63,7 @@ vector<Adresat> PlikZAdresatami::wczytajAdresatowZalogowanegoUzytkownikaZPliku(i
     }
     return adresaci;
 }
+
 int PlikZAdresatami::pobierzIdUzytkownikaZDanychOddzielonychPionowymiKreskami(string daneJednegoAdresataOddzielonePionowymiKreskami) {
     int pozycjaRozpoczeciaIdUzytkownika = daneJednegoAdresataOddzielonePionowymiKreskami.find_first_of('|') + 1;
     int idUzytkownika = MetodyPomocnicze::konwersjaStringNaInt(MetodyPomocnicze::pobierzLiczbe(daneJednegoAdresataOddzielonePionowymiKreskami, pozycjaRozpoczeciaIdUzytkownika));
@@ -117,4 +118,81 @@ int PlikZAdresatami::pobierzIdAdresataZDanychOddzielonychPionowymiKreskami(strin
 
 int PlikZAdresatami::pobierzIdOstatniegoAdresata() {
     return idOstatniegoAdresata;
+}
+
+void PlikZAdresatami::usunAdresataZPliku(int idUsuwanegoAdresata) {
+    string linia = "", idPobraneZLinii = "";
+    int idPobraneZLiniiInt = 0;
+
+    ifstream file;
+    file.open("Adresaci.txt");
+
+    ofstream temp;
+    temp.open("Przejsciowy plik adresaci.txt");
+
+    if (file.good()) {
+        while (getline(file,linia)) {
+            int dlugoscLinii = linia.length();
+
+            for (int i = 0; i < dlugoscLinii; i++) {
+                if (linia[i] != '|') {
+                    idPobraneZLinii += linia[i];
+                } else {
+                    break;
+                }
+            }
+            idPobraneZLiniiInt = MetodyPomocnicze::konwersjaStringNaInt(idPobraneZLinii);
+
+            if (idPobraneZLiniiInt != idUsuwanegoAdresata) {
+                temp << linia << endl;
+            }
+            idPobraneZLiniiInt = 0;
+            idPobraneZLinii = "";
+        }
+        temp.close();
+        file.close();
+
+        remove("Adresaci.txt");
+        rename("Przejsciowy plik adresaci.txt", "Adresaci.txt");
+    } else {
+        cout << "Usuwanie danych z pliku zakonczone niepowodzeniem!" << endl << endl;
+    }
+}
+
+void PlikZAdresatami::zmienDaneAdresataWPliku(vector<string> daneDoEdycji, int idAdresataDoEdycji) {
+    string stareDane = daneDoEdycji[0], noweDane = daneDoEdycji[1];
+    int dlugoscStarychDanych = stareDane.length(), idPobraneZLiniiInt = 0;
+    string linia = "", idPobraneZLinii = "";
+
+    ifstream file;
+    file.open("Adresaci.txt");
+    ofstream temp;
+    temp.open("Przejsciowy plik adresaci.txt");
+
+    while (getline(file,linia)) {
+        int dlugoscLinii = linia.length();
+
+        for (int i = 0; i < dlugoscLinii; i++) {
+            if (linia[i] != '|') {
+                idPobraneZLinii += linia[i];
+            } else {
+                break;
+            }
+        }
+        idPobraneZLiniiInt = MetodyPomocnicze::konwersjaStringNaInt(idPobraneZLinii);
+
+        if (idPobraneZLiniiInt == idAdresataDoEdycji) {
+            linia.replace(linia.find(stareDane), dlugoscStarychDanych, noweDane);
+            temp << linia << endl;
+        } else {
+            temp << linia << endl;
+        }
+        idPobraneZLiniiInt = 0;
+        idPobraneZLinii = "";
+    }
+    temp.close();
+    file.close();
+
+    remove("Adresaci.txt");
+    rename("Przejsciowy plik adresaci.txt", "Adresaci.txt");
 }

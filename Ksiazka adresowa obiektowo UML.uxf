@@ -25,6 +25,8 @@ KsiazkaAdresowa()
 + wyswietlWszystkichAdresatow() : void 
 + wyszukajAdresatowPoImieniu() : void
 + wyszukajAdresatowPoNazwisku() : void
++ usunAdresata() : void
++ edytujDaneAdresata() : void
 + ustawIdZalogowanegoUzytkownika() : void 
 + zmianaHaslaZalogowanegoUzytkownika() : void 
 + wylogowanieUzytkownika() : void 
@@ -144,7 +146,7 @@ Adresat()</panel_attributes>
       <x>432</x>
       <y>568</y>
       <w>304</w>
-      <h>200</h>
+      <h>208</h>
     </coordinates>
     <panel_attributes>AdresatMenedzer
 --
@@ -154,12 +156,15 @@ Adresat()</panel_attributes>
 - PlikZAdresatami : plikZAdresatami
 - wyswietlDaneAdresata() : void
 - wyswietlIloscWyszukanychAdresatow(int iloscAdresatow);
+- wybierzDaneDoEdycji() : void
 --
 AdresatMenedzer()
 + dodajAdresata() : Integer
 + wyswietlWszystkichAdresatow() : void
 + wyszukajAdresatowPoImieniu() : void
-+ wyszukajAdresatowPoNazwisku() : void</panel_attributes>
++ wyszukajAdresatowPoNazwisku() : void
++ usunAdresata() : void
++ edytujDaneAdresata() : void</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -183,6 +188,8 @@ AdresatMenedzer()
 + dopiszAdresataDoPliku() : void
 + wczytajAdresatowZalogowanegoUzytkownikaZPliku() : vector&lt;Adresat&gt;
 + pobierzIdOstatniegoAdresata() : Integer
++ usunAdresataZPliku() : void
++ zmienDaneAdresataWPliku() : void
 
 </panel_attributes>
     <additional_attributes/>

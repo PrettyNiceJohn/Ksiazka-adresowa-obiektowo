@@ -120,3 +120,235 @@ void AdresatMenedzer::wyszukajAdresatowPoNazwisku() {
     cout << endl;
     system("pause");
 }
+
+void AdresatMenedzer::usunAdresata() {
+    int idUsuwanegoAdresata = 0, brakZgodnosci = 0, dlugoscWektora = adresaci.size();
+    string idStr = "";
+    char wybor;
+
+    system("cls");
+    cout << "     >>> Usun adresata <<<" << endl << endl;
+
+    if (dlugoscWektora == 0) {
+        cout << "Ksiazka adresowa jest pusta!" << endl << endl;
+    } else {
+        cout << "Podaj numer identyfikacyjny osoby, ktora chcesz usunac: ";
+
+        idStr = MetodyPomocnicze::wczytajLinie();
+        idUsuwanegoAdresata = MetodyPomocnicze::konwersjaStringNaInt(idStr);
+
+        for (vector <Adresat>::iterator itr = adresaci.begin(); itr != adresaci.end(); itr++) {
+            if (itr -> Adresat::pobierzId() == idUsuwanegoAdresata) {
+                wyswietlDaneAdresata(*itr);
+                cout << endl;
+                cout << "Czy na pewno chcesz usunac dana osobe? [t/n] ";
+                wybor = MetodyPomocnicze::wczytajZnak();
+
+                if (wybor == 't') {
+                    adresaci.erase(itr);
+
+                    plikZAdresatami.usunAdresataZPliku(idUsuwanegoAdresata);
+
+                    cout << endl << "Usuwanie danych zakonczone powodzeniem!" << endl << endl;
+                    system("pause");
+                    break;
+                } else if (wybor == 'n') {
+                    cout << endl << "Wstrzymano usuwanie danych!" << endl << endl;
+                    system("pause");
+                    break;
+                } else {
+                    cout << endl << "Musisz wpisac tak[t] lub nie[n]!" << endl << endl;
+                    system("pause");
+                }
+            }  else {
+                brakZgodnosci++;
+            }
+        }
+        if (brakZgodnosci == dlugoscWektora) {
+            cout << endl << "W ksiazce adresowej nie ma osoby o podanym numerze identyfikacyjnym!" << endl << endl;
+            system("pause");
+        } else if (adresaci.size() == 0) {
+            cout << "Ksiazka adresowa jest teraz pusta!" << endl << endl;
+            system("pause");
+        }
+    }
+}
+
+void AdresatMenedzer::edytujDaneAdresata() {
+    string idString = "";
+    int idAdresataDoEdycji, brakZgodnosci = 0, dlugoscWektora = adresaci.size();
+    char wybor;
+
+    system("cls");
+    cout << "      >>> Edytuj dane adresata <<<" << endl << endl;
+
+    if (dlugoscWektora == 0) {
+        cout << "Ksiazka adresowa jest pusta!" << endl << endl;
+        system("pause");
+    } else {
+        cout << "Podaj numer identyfikacyjny osoby, ktorej chcesz edytowac dane: ";
+        idString = MetodyPomocnicze::wczytajLinie();
+        idAdresataDoEdycji = MetodyPomocnicze::konwersjaStringNaInt(idString);
+
+        for (vector <Adresat>::iterator itr = adresaci.begin(); itr != adresaci.end(); itr++) {
+            if (itr -> Adresat::pobierzId() == idAdresataDoEdycji) {
+                wyswietlDaneAdresata(*itr);
+                cout << endl;
+                cout << "Czy chcesz edytowac dane podanej osoby? [t/n] ";
+                wybor = MetodyPomocnicze::wczytajZnak();
+
+                if (wybor == 't') {
+                    wybierzDaneDoEdycji(idAdresataDoEdycji);
+                    break;
+                } else if (wybor == 'n') {
+                    cout << endl << "Wstrzymano edycje danych!" << endl << endl;
+                    system("pause");
+                    break;
+                } else {
+                    cout << endl << "Musisz wpisac tak[t] lub nie[n]!" << endl << endl;
+                    Sleep(1500);
+                }
+            }  else {
+                brakZgodnosci++;
+            }
+        }
+        if (brakZgodnosci == dlugoscWektora) {
+            cout << endl << "W ksiazce adresowej nie ma osoby o podanym numerze identyfikacyjnym!" << endl << endl;
+            system("pause");
+        }
+    }
+}
+
+void AdresatMenedzer::wybierzDaneDoEdycji(int idAdresataDoEdycji) {
+    char wybor;
+    string imie, nazwisko, numerTelefonu, email, adres;
+    vector<string> daneDoEdycji;
+
+    system ("cls");
+    cout << "  >>> Edytuj dana adresata <<<" << endl << endl;
+    cout << "Wybierz dane do edycji: " << endl;
+    cout << "1. Imie" << endl;
+    cout << "2. Nazwisko" << endl;
+    cout << "3. Numer telefonu" << endl;
+    cout << "4. Email" << endl;
+    cout << "5. Adres" << endl;
+    cout << "6. Powrot do menu" << endl;
+    cout << endl << "Twoj wybor: ";
+    wybor = MetodyPomocnicze::wczytajZnak();
+    cout << endl;
+
+    switch (wybor) {
+    case '1':
+        system("cls");
+        cout << "  > Imie <" << endl << endl;
+
+        for (vector <Adresat>::iterator itr = adresaci.begin(); itr != adresaci.end(); itr++) {
+            if (itr -> Adresat::pobierzId() == idAdresataDoEdycji) {
+                cout << "Stare: " << itr -> Adresat::pobierzImie() << endl;
+                cout << "Nowe: ";
+                imie = MetodyPomocnicze::wczytajLinie();
+                imie = MetodyPomocnicze::zamienPierwszaLitereNaDuzaAPozostaleNaMale(imie);
+
+                daneDoEdycji.push_back(itr -> Adresat::pobierzImie());
+                daneDoEdycji.push_back(imie);
+
+                itr -> Adresat::ustawImie(imie);
+            }
+        }
+        plikZAdresatami.zmienDaneAdresataWPliku(daneDoEdycji, idAdresataDoEdycji);
+        cout << endl << "Edycja danych zakonczona powodzeniem!" << endl << endl;
+        system("pause");
+        break;
+    case '2':
+        system("cls");
+        cout << "  > Nazwisko <" << endl << endl;
+
+        for (vector <Adresat>::iterator itr = adresaci.begin(); itr != adresaci.end(); itr++) {
+            if (itr -> Adresat::pobierzId() == idAdresataDoEdycji) {
+                cout << "Stare: " << itr -> Adresat::pobierzNazwisko() << endl;
+                cout << "Nowe: ";
+                nazwisko = MetodyPomocnicze::wczytajLinie();
+                nazwisko = MetodyPomocnicze::zamienPierwszaLitereNaDuzaAPozostaleNaMale(nazwisko);
+
+                daneDoEdycji.push_back(itr -> Adresat::pobierzNazwisko());
+                daneDoEdycji.push_back(nazwisko);
+
+                itr -> Adresat::ustawNazwisko(nazwisko);
+            }
+        }
+        plikZAdresatami.zmienDaneAdresataWPliku(daneDoEdycji, idAdresataDoEdycji);
+
+        cout << endl << "Edycja danych zakonczona powodzeniem!" << endl << endl;
+        system("pause");
+        break;
+    case '3':
+        system("cls");
+        cout << "  > Numer telefonu <" << endl << endl;
+
+        for (vector <Adresat>::iterator itr = adresaci.begin(); itr != adresaci.end(); itr++) {
+            if (itr -> Adresat::pobierzId() == idAdresataDoEdycji) {
+                cout << "Stary: " << itr -> Adresat::pobierzNumerTelefonu() << endl;
+                cout << "Nowy: ";
+                numerTelefonu = MetodyPomocnicze::wczytajLinie();
+
+                daneDoEdycji.push_back(itr -> Adresat::pobierzNumerTelefonu());
+                daneDoEdycji.push_back(numerTelefonu);
+
+                itr -> Adresat::ustawNumerTelefonu(numerTelefonu);
+            }
+        }
+        plikZAdresatami.zmienDaneAdresataWPliku(daneDoEdycji, idAdresataDoEdycji);
+
+        cout << endl << "Edycja danych zakonczona powodzeniem!" << endl << endl;
+        system("pause");
+        break;
+    case '4':
+        system("cls");
+        cout << "  > Email <" << endl << endl;
+
+        for (vector <Adresat>::iterator itr = adresaci.begin(); itr != adresaci.end(); itr++) {
+            if (itr -> Adresat::pobierzId() == idAdresataDoEdycji) {
+                cout << "Stary: " << itr -> Adresat::pobierzEmail() << endl;
+                cout << "Nowy: ";
+                email = MetodyPomocnicze::wczytajLinie();
+
+                daneDoEdycji.push_back(itr -> Adresat::pobierzEmail());
+                daneDoEdycji.push_back(email);
+
+                itr -> Adresat::ustawEmail(email);
+            }
+        }
+        plikZAdresatami.zmienDaneAdresataWPliku(daneDoEdycji, idAdresataDoEdycji);
+
+        cout << endl << "Edycja danych zakonczona powodzeniem!" << endl << endl;
+        system("pause");
+        break;
+    case '5':
+        system("cls");
+        cout << "  > Adres <" << endl << endl;
+
+        for (vector <Adresat>::iterator itr = adresaci.begin(); itr != adresaci.end(); itr++) {
+            if (itr -> Adresat::pobierzId() == idAdresataDoEdycji) {
+                cout << "Stary: " << itr -> Adresat::pobierzAdres() << endl;
+                cout << "Nowy: ";
+                adres = MetodyPomocnicze::wczytajLinie();
+
+                daneDoEdycji.push_back(itr -> Adresat::pobierzAdres());
+                daneDoEdycji.push_back(adres);
+
+                itr -> Adresat::ustawAdres(adres);
+            }
+        }
+        plikZAdresatami.zmienDaneAdresataWPliku(daneDoEdycji, idAdresataDoEdycji);
+
+        cout << endl << "Edycja danych zakonczona powodzeniem!" << endl << endl;
+        system("pause");
+        break;
+    case '6':
+        break;
+    default:
+        cout << "Musisz wybrac cyfre od 1 do 6!" << endl;
+        Sleep(1500);
+        break;
+    }
+}
