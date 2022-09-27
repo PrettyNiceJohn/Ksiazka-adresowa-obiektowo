@@ -19,10 +19,12 @@ class AdresatMenedzer {
     void wyswietlDaneAdresata(Adresat adresat);
     void wyswietlIloscWyszukanychAdresatow(int iloscAdresatow);
     void wybierzDaneDoEdycji(int idAdresataDoEdycji);
+    int idUsunietegoAdresata;
 public:
     AdresatMenedzer(string nazwaPlikuZAdresatami, int idZalogowanegoUzytkownika)
         : ID_ZALOGOWANEGO_UZYTKOWNIKA(idZalogowanegoUzytkownika), plikZAdresatami(nazwaPlikuZAdresatami) {
         adresaci = plikZAdresatami.wczytajAdresatowZalogowanegoUzytkownikaZPliku(ID_ZALOGOWANEGO_UZYTKOWNIKA);
+        idUsunietegoAdresata = 0;
     };
     void dodajAdresata();
     void wyswietlWszystkichAdresatow();
@@ -30,6 +32,8 @@ public:
     void wyszukajAdresatowPoNazwisku();
     void usunAdresata();
     void edytujDaneAdresata();
+    void ustawIdUsunietegoAdresata(int idUsuwanegoAdresata);
+    int pobierzIdUsunietegoAdresata();
 };
 
 #endif

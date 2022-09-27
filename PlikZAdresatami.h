@@ -16,6 +16,7 @@ class PlikZAdresatami {
     Adresat pobierzDaneAdresata(string daneAdresataOddzielonePionowymiKreskami);
     int pobierzIdAdresataZDanychOddzielonychPionowymiKreskami(string daneJednegoAdresataOddzielonePionowymiKreskami);
     int idOstatniegoAdresata;
+    int policzWszystkichAdresatow();
 public:
     PlikZAdresatami(string nazwaPlikuZAdresatami)
         : NAZWA_PLIKU_Z_ADRESATAMI(nazwaPlikuZAdresatami) {

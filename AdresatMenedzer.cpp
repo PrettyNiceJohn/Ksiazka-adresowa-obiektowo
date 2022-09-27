@@ -3,7 +3,12 @@
 Adresat AdresatMenedzer::podajDaneNowegoAdresata() {
     Adresat adresat;
 
-    adresat.ustawId((plikZAdresatami.pobierzIdOstatniegoAdresata() + 1));
+    if (pobierzIdUsunietegoAdresata() < plikZAdresatami.pobierzIdOstatniegoAdresata()){
+        adresat.ustawId((plikZAdresatami.pobierzIdOstatniegoAdresata() + 1));
+    } else {
+        adresat.ustawId(pobierzIdUsunietegoAdresata());
+    }
+
     adresat.ustawIdUzytkownika(ID_ZALOGOWANEGO_UZYTKOWNIKA);
 
     cout << "Podaj imie: ";
@@ -148,6 +153,8 @@ void AdresatMenedzer::usunAdresata() {
                     adresaci.erase(itr);
 
                     plikZAdresatami.usunAdresataZPliku(idUsuwanegoAdresata);
+
+                    ustawIdUsunietegoAdresata(idUsuwanegoAdresata);
 
                     cout << endl << "Usuwanie danych zakonczone powodzeniem!" << endl << endl;
                     system("pause");
@@ -351,4 +358,12 @@ void AdresatMenedzer::wybierzDaneDoEdycji(int idAdresataDoEdycji) {
         Sleep(1500);
         break;
     }
+}
+
+int AdresatMenedzer::pobierzIdUsunietegoAdresata(){
+    return idUsunietegoAdresata;
+}
+
+void AdresatMenedzer::ustawIdUsunietegoAdresata(int idUsuwanegoAdresata){
+    idUsunietegoAdresata = idUsuwanegoAdresata;
 }
