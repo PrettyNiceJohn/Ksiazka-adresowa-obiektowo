@@ -3,10 +3,10 @@
 Adresat AdresatMenedzer::podajDaneNowegoAdresata() {
     Adresat adresat;
 
-    if (pobierzIdUsunietegoAdresata() < plikZAdresatami.pobierzIdOstatniegoAdresata()){
-        adresat.ustawId((plikZAdresatami.pobierzIdOstatniegoAdresata() + 1));
-    } else {
+    if (pobierzIdUsunietegoAdresata() >= plikZAdresatami.pobierzIdOstatniegoAdresata()){
         adresat.ustawId(pobierzIdUsunietegoAdresata());
+    } else {
+        adresat.ustawId((plikZAdresatami.pobierzIdOstatniegoAdresata() + 1));
     }
 
     adresat.ustawIdUzytkownika(ID_ZALOGOWANEGO_UZYTKOWNIKA);
