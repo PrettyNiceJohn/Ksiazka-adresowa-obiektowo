@@ -17,15 +17,15 @@ string PlikZAdresatami::zamienDaneAdresataNaLinieZDanymiOddzielonymiPionowymiKre
 void PlikZAdresatami::dopiszAdresataDoPliku(Adresat adresat) {
     string liniaZDanymiAdresata = "";
     fstream plikTekstowy;
-    plikTekstowy.open(NAZWA_PLIKU_Z_ADRESATAMI.c_str(), ios::out | ios::app);
+    plikTekstowy.open(pobierzNazwePliku().c_str(), ios::out | ios::app);
 
     if (plikTekstowy.good() == true) {
         liniaZDanymiAdresata = zamienDaneAdresataNaLinieZDanymiOddzielonymiPionowymiKreskami(adresat);
 
-        if (MetodyPomocnicze::czyPlikJestPusty(plikTekstowy) == true) {
+        if (czyPlikJestPusty() == true) {
             plikTekstowy << liniaZDanymiAdresata;
         } else {
-            plikTekstowy << endl << liniaZDanymiAdresata ;
+            plikTekstowy << endl << liniaZDanymiAdresata;
         }
         idOstatniegoAdresata++;
         cout << "Nowy adresat zostal dodany" << endl;
@@ -43,7 +43,7 @@ vector<Adresat> PlikZAdresatami::wczytajAdresatowZalogowanegoUzytkownikaZPliku(i
     string daneOstaniegoAdresataWPliku = "";
     fstream plikTekstowy;
 
-    plikTekstowy.open(NAZWA_PLIKU_Z_ADRESATAMI.c_str(), ios::in);
+    plikTekstowy.open(pobierzNazwePliku().c_str(), ios::in);
 
     if (plikTekstowy.good() == true) {
         while (getline(plikTekstowy, daneJednegoAdresataOddzielonePionowymiKreskami)) {
@@ -143,10 +143,12 @@ void PlikZAdresatami::usunAdresataZPliku(int idUsuwanegoAdresata) {
             }
             idPobraneZLiniiInt = MetodyPomocnicze::konwersjaStringNaInt(idPobraneZLinii);
 
-            if (idPobraneZLiniiInt != idUsuwanegoAdresata && numerLinii > 1) {
-                temp << endl << linia;
-            } else if (numerLinii == 1 && idPobraneZLiniiInt != idUsuwanegoAdresata){
+            if (idPobraneZLiniiInt != idUsuwanegoAdresata && numerLinii == 1) {
                 temp << linia;
+            } else if (idPobraneZLiniiInt == idUsuwanegoAdresata && numerLinii == 1) {
+                numerLinii--;
+            } else if (idPobraneZLiniiInt != idUsuwanegoAdresata && numerLinii > 1) {
+                temp << endl << linia;
             }
             numerLinii++;
             idPobraneZLiniiInt = 0;
@@ -188,10 +190,10 @@ void PlikZAdresatami::zmienDaneAdresataWPliku(vector<string> daneDoEdycji, int i
         if (idPobraneZLiniiInt == idAdresataDoEdycji && numerLinii < iloscAdresatowWPliku) {
             linia.replace(linia.find(stareDane), dlugoscStarychDanych, noweDane);
             temp << linia << endl;
-        } else if (idPobraneZLiniiInt == idAdresataDoEdycji && numerLinii == iloscAdresatowWPliku){
+        } else if (idPobraneZLiniiInt == idAdresataDoEdycji && numerLinii == iloscAdresatowWPliku) {
             linia.replace(linia.find(stareDane), dlugoscStarychDanych, noweDane);
             temp << linia;
-        } else if (idPobraneZLiniiInt != idAdresataDoEdycji && numerLinii < iloscAdresatowWPliku){
+        } else if (idPobraneZLiniiInt != idAdresataDoEdycji && numerLinii < iloscAdresatowWPliku) {
             temp << linia << endl;
         } else {
             temp << linia;
@@ -207,7 +209,7 @@ void PlikZAdresatami::zmienDaneAdresataWPliku(vector<string> daneDoEdycji, int i
     rename("Przejsciowy plik adresaci.txt", "Adresaci.txt");
 }
 
-int PlikZAdresatami::policzWszystkichAdresatow(){
+int PlikZAdresatami::policzWszystkichAdresatow() {
     string linia = "";
     int iloscAdresatowWPliku = 0;
     ifstream file;
@@ -219,4 +221,12 @@ int PlikZAdresatami::policzWszystkichAdresatow(){
     file.close();
 
     return iloscAdresatowWPliku;
+}
+
+int PlikZAdresatami::pobierzIdUsunietegoAdresata() {
+    return idUsunietegoAdresata;
+}
+
+void PlikZAdresatami::ustawIdUsunietegoAdresata(int idUsuwanegoAdresata) {
+    idUsunietegoAdresata = idUsuwanegoAdresata;
 }

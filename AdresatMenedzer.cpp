@@ -3,21 +3,23 @@
 Adresat AdresatMenedzer::podajDaneNowegoAdresata() {
     Adresat adresat;
 
-    if (pobierzIdUsunietegoAdresata() >= plikZAdresatami.pobierzIdOstatniegoAdresata()){
-        adresat.ustawId(pobierzIdUsunietegoAdresata());
+    if (plikZAdresatami.pobierzIdOstatniegoAdresata() == 0 && plikZAdresatami.pobierzIdUsunietegoAdresata() == 0) {
+        adresat.ustawId(1);
+    } else if (plikZAdresatami.pobierzIdUsunietegoAdresata() == plikZAdresatami.pobierzIdOstatniegoAdresata()) {
+        adresat.ustawId(plikZAdresatami.pobierzIdUsunietegoAdresata());
     } else {
-        adresat.ustawId((plikZAdresatami.pobierzIdOstatniegoAdresata() + 1));
+        adresat.ustawId(plikZAdresatami.pobierzIdOstatniegoAdresata() + 1);
     }
 
     adresat.ustawIdUzytkownika(ID_ZALOGOWANEGO_UZYTKOWNIKA);
 
     cout << "Podaj imie: ";
     adresat.ustawImie(MetodyPomocnicze::wczytajLinie());
-    adresat.ustawImie(MetodyPomocnicze::zamienPierwszaLitereNaDuzaAPozostaleNaMale(adresat.pobierzImie()));
+    adresat.ustawImie(zamienPierwszaLitereNaDuzaAPozostaleNaMale(adresat.pobierzImie()));
 
     cout << "Podaj nazwisko: ";
     adresat.ustawNazwisko(MetodyPomocnicze::wczytajLinie());
-    adresat.ustawNazwisko(MetodyPomocnicze::zamienPierwszaLitereNaDuzaAPozostaleNaMale(adresat.pobierzNazwisko()));
+    adresat.ustawNazwisko(zamienPierwszaLitereNaDuzaAPozostaleNaMale(adresat.pobierzNazwisko()));
 
     cout << "Podaj numer telefonu: ";
     adresat.ustawNumerTelefonu(MetodyPomocnicze::wczytajLinie());
@@ -40,6 +42,14 @@ void AdresatMenedzer::dodajAdresata() {
 
     adresaci.push_back(adresat);
     plikZAdresatami.dopiszAdresataDoPliku(adresat);
+}
+
+string AdresatMenedzer::zamienPierwszaLitereNaDuzaAPozostaleNaMale(string tekst) {
+    if (!tekst.empty()) {
+        transform(tekst.begin(), tekst.end(), tekst.begin(), ::tolower);
+        tekst[0] = toupper(tekst[0]);
+    }
+    return tekst;
 }
 
 void AdresatMenedzer::wyswietlWszystkichAdresatow() {
@@ -77,7 +87,7 @@ void AdresatMenedzer::wyszukajAdresatowPoImieniu() {
 
         cout << "Wyszukaj adresatow o imieniu: ";
         imiePoszukiwanegoAdresata = MetodyPomocnicze::wczytajLinie();
-        imiePoszukiwanegoAdresata = MetodyPomocnicze::zamienPierwszaLitereNaDuzaAPozostaleNaMale(imiePoszukiwanegoAdresata);
+        imiePoszukiwanegoAdresata = zamienPierwszaLitereNaDuzaAPozostaleNaMale(imiePoszukiwanegoAdresata);
 
         for (vector <Adresat>::iterator  itr = adresaci.begin(); itr != adresaci.end(); itr++) {
             if (itr -> Adresat::pobierzImie() == imiePoszukiwanegoAdresata) {
@@ -110,7 +120,7 @@ void AdresatMenedzer::wyszukajAdresatowPoNazwisku() {
 
         cout << "Wyszukaj adresatow o nazwisku: ";
         nazwiskoPoszukiwanegoAdresata = MetodyPomocnicze::wczytajLinie();
-        nazwiskoPoszukiwanegoAdresata = MetodyPomocnicze::zamienPierwszaLitereNaDuzaAPozostaleNaMale(nazwiskoPoszukiwanegoAdresata);
+        nazwiskoPoszukiwanegoAdresata = zamienPierwszaLitereNaDuzaAPozostaleNaMale(nazwiskoPoszukiwanegoAdresata);
 
         for (vector <Adresat>::iterator itr = adresaci.begin(); itr != adresaci.end(); itr++) {
             if (itr -> Adresat::pobierzNazwisko() == nazwiskoPoszukiwanegoAdresata) {
@@ -153,8 +163,7 @@ void AdresatMenedzer::usunAdresata() {
                     adresaci.erase(itr);
 
                     plikZAdresatami.usunAdresataZPliku(idUsuwanegoAdresata);
-
-                    ustawIdUsunietegoAdresata(idUsuwanegoAdresata);
+                    plikZAdresatami.ustawIdUsunietegoAdresata(idUsuwanegoAdresata);
 
                     cout << endl << "Usuwanie danych zakonczone powodzeniem!" << endl << endl;
                     system("pause");
@@ -254,7 +263,7 @@ void AdresatMenedzer::wybierzDaneDoEdycji(int idAdresataDoEdycji) {
                 cout << "Stare: " << itr -> Adresat::pobierzImie() << endl;
                 cout << "Nowe: ";
                 imie = MetodyPomocnicze::wczytajLinie();
-                imie = MetodyPomocnicze::zamienPierwszaLitereNaDuzaAPozostaleNaMale(imie);
+                imie = zamienPierwszaLitereNaDuzaAPozostaleNaMale(imie);
 
                 daneDoEdycji.push_back(itr -> Adresat::pobierzImie());
                 daneDoEdycji.push_back(imie);
@@ -275,7 +284,7 @@ void AdresatMenedzer::wybierzDaneDoEdycji(int idAdresataDoEdycji) {
                 cout << "Stare: " << itr -> Adresat::pobierzNazwisko() << endl;
                 cout << "Nowe: ";
                 nazwisko = MetodyPomocnicze::wczytajLinie();
-                nazwisko = MetodyPomocnicze::zamienPierwszaLitereNaDuzaAPozostaleNaMale(nazwisko);
+                nazwisko = zamienPierwszaLitereNaDuzaAPozostaleNaMale(nazwisko);
 
                 daneDoEdycji.push_back(itr -> Adresat::pobierzNazwisko());
                 daneDoEdycji.push_back(nazwisko);
@@ -358,12 +367,4 @@ void AdresatMenedzer::wybierzDaneDoEdycji(int idAdresataDoEdycji) {
         Sleep(1500);
         break;
     }
-}
-
-int AdresatMenedzer::pobierzIdUsunietegoAdresata(){
-    return idUsunietegoAdresata;
-}
-
-void AdresatMenedzer::ustawIdUsunietegoAdresata(int idUsuwanegoAdresata){
-    idUsunietegoAdresata = idUsuwanegoAdresata;
 }

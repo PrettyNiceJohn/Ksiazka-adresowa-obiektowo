@@ -93,6 +93,6 @@ void KsiazkaAdresowa::usunAdresata() {
     adresatMenedzer -> usunAdresata();
 }
 
-void KsiazkaAdresowa::edytujDaneAdresata(){
+void KsiazkaAdresowa::edytujDaneAdresata() {
     adresatMenedzer -> edytujDaneAdresata();
 }

@@ -13,10 +13,8 @@ public:
     static string konwerjsaIntNaString(int liczba);
     static string wczytajLinie();
     static char wczytajZnak();
-    static bool czyPlikJestPusty(fstream &plikTekstowy);
     static string pobierzLiczbe(string tekst, int pozycjaZnaku);
     static int konwersjaStringNaInt(string liczba);
-    static string zamienPierwszaLitereNaDuzaAPozostaleNaMale(string tekst);
 };
 
 #endif
