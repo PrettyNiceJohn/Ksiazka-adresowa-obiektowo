@@ -4,220 +4,220 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>63</x>
+      <x>56</x>
       <y>392</y>
       <w>252</w>
       <h>245</h>
     </coordinates>
-    <panel_attributes>KsiazkaAdresowa
+    <panel_attributes>AddressBook
 --
-- UzytkownikMenedzer : uzytkownikMenedzer
-- *adresatMenedzer : AdresatMenedzer 
-- NAZWA_PLIKU_Z_ADRESATAMI : const String
+- UserManager : userManager
+- *recipientManager : RecipientManager 
+- NAME_OF_THE_RECIPIENT_FILE : const String
 --
-+ KsiazkaAdresowa()
-+ ~KsiazkaAdresowa()
-+ wybierzOpcjeZMenuGlownego() : Character
-+ rejestracjaUzytkownika() : void
-+ logowanieUzytkownika() : void
-+ wybierzOpcjeZMenuUzytkownika() : Character
-+ dodajAdresata() : void
-+ wyswietlWszystkichAdresatow() : void 
-+ wyszukajAdresatowPoImieniu() : void
-+ wyszukajAdresatowPoNazwisku() : void
-+ usunAdresata() : void
-+ edytujDaneAdresata() : void
-+ ustawIdZalogowanegoUzytkownika() : void 
-+ zmianaHaslaZalogowanegoUzytkownika() : void 
-+ wylogowanieUzytkownika() : void 
-+ czyUzytkownikJestZalogowany() : bool </panel_attributes>
++ AddressBook()
++ ~AddressBook()
++ selectAnOptionFromTheMainMenu() : Character
++ userRegistration() : void
++ userLogin() : void
++ selectAnOptionFromTheUserMenu() : Character
++ addRecipient() : void
++ viewAllRecipients() : void 
++ searchByName() : void
++ searchBySurname() : void
++ removeRecipient() : void
++ editRecipientData() : void
++ setIdOfTheLoggedInUser() : void 
++ editPasswordOfTheLoggedInUser() : void 
++ userLogout() : void 
++ isTheUserLoggedIn() : bool </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>546</x>
+      <x>539</x>
       <y>147</y>
       <w>196</w>
       <h>56</h>
     </coordinates>
-    <panel_attributes>Uzytkownik
+    <panel_attributes>User
 --
 - id : Integer
 - login : String
-- haslo : String</panel_attributes>
+- password : String</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>378</x>
+      <x>371</x>
       <y>308</y>
       <w>224</w>
       <h>196</h>
     </coordinates>
-    <panel_attributes>UzytkownikMenedzer
+    <panel_attributes>UserManager
 --
-- idZalogowanegoUzytkownika : Integer
-- uzytkownicy : vector &lt;Uzytkownik&gt;
-- PlikZUzytkownikami : plikZUzytkownikami
+- idOfTheLoggedInUser : Integer
+- users : vector &lt;User&gt;
+- FileWithUsers : fileWithUsers
 --
-+ UzytkownikMenedzer()
-+ rejestracjaUzytkownika() : void
-+ logowanieUzytkownika() : Integer
-+ ustawIdZalogowanegoUzytkownika() : void
-+ zmianaHaslaZalogowanegoUzytkownika() : void
-+ wylogowanieUzytkownika() : void
-+ czyUzytkownikJestZalogowany() : Bool
-+ pobierzIdZalogowanegoUzytkownika : Integer
++ UserManager()
++ userRegistration() : void
++ userLogin() : Integer
++ setIdOfTheLoggedInUser() : void
++ editPasswordOfTheLoggedInUser() : void
++ userLogout() : void
++ isTheUserLoggedIn() : Bool
++ getIdOfTheLoggedInUser : Integer
 
-- podajDaneNowegoUzytkownika() : Uzytkownik
-- pobierzIdNowegoUzytkownika() : Integer
-- czyIstniejeLogin() : Bool
+- enterNewUserDetails() : Uzytkownik
+- getNewUserId() : Integer
+- isThereALogin() : Bool
 
 
 </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>679</x>
+      <y>259</y>
+      <w>476</w>
+      <h>119</h>
+    </coordinates>
+    <panel_attributes>FileWithUsers
+--
+
+--
++ FileWithUsers()
++ addUserToFile() : void
++ loadUsersFromFile : vector&lt;User&gt;
++ saveAllRecipientsToFile : void
+
+- changeUserDataOnALineWithDataSeparatedByVerticalLines(User user) : String
+- getUserData(string dataOfSingleUserSeparatedByVerticalLines) : User</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>686</x>
-      <y>259</y>
-      <w>476</w>
-      <h>119</h>
-    </coordinates>
-    <panel_attributes>PlikZUzytkownikami
---
-
---
-+ PlikZUzytkownikami()
-+ dopiszUzytkownikaDoPliku() : void
-+ wczytajUzytkownikowZPliku : vector&lt;Uzytkownik&gt;
-+ zapiszWszystkichUzytkownikowDoPliku : void
-
-- zamienDaneUzytkownikaNaLinieZDanymiOddzielonaPionowymiKreskami(Uzytkownik uzytkownik) : String
-- pobierzDaneUzytkownika(string daneJednegoUzytkownikaOddzielonePionowymiKreskami) : Uzytkownik</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>693</x>
       <y>413</y>
       <w>168</w>
       <h>84</h>
     </coordinates>
-    <panel_attributes>MetodyPomocnicze
+    <panel_attributes>HelperMethods
 --
 --
-_+ konwersjaIntNaString() : String_
-_+ wczytajZnak() : Character_
-_+ wczytajLinie() : String_
-_+ pobierzLiczbe() : Integer_
-_+ konwersjaStringNaInt() : Integer_</panel_attributes>
+_+ conversionIntegerToString() : String_
+_+ loadSign() : Character_
+_+ loadLine() : String_
+_+ getNumber() : Integer_
+_+ conversionStringToInteger() : Integer_</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>595</x>
+      <x>588</x>
       <y>784</y>
       <w>154</w>
       <h>98</h>
     </coordinates>
-    <panel_attributes>Adresat
+    <panel_attributes>Person
 --
 - id : Integer
-- idUzytkownika : Integer
-- imie : String
-- nazwisko : String
-- numerTelefonu : String
+- userId : Integer
+- name : String
+- surname : String
+- phoneNumber : String
 - email : String
-- adres : String</panel_attributes>
+- address : String</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>378</x>
+      <x>371</x>
       <y>532</y>
       <w>266</w>
       <h>217</h>
     </coordinates>
-    <panel_attributes>AdresatMenedzer
+    <panel_attributes>RecipientManager
 --
-- ID_ZALOGOWANEGO_UZYTKOWNIKA : const Integer
-- adresaci : vector &lt;Adresat&gt;
-- PlikZAdresatami : plikZAdresatami
+- ID_OF_LOGGED_IN_USER : const Integer
+- recipients : vector &lt;Recipient&gt;
+- FileWithRecipients : fileWithRecipients
 --
-+ AdresatMenedzer()
-+ dodajAdresata() : Integer
-+ wyswietlWszystkichAdresatow() : void
-+ wyszukajAdresatowPoImieniu() : void
-+ wyszukajAdresatowPoNazwisku() : void
-+ usunAdresata() : void
-+ edytujDaneAdresata() : void
++ RecipientManager()
++ addRecipient() : Integer
++ viewAllRecipients() : void 
++ searchByName() : void
++ searchBySurname() : void
++ removeRecipient() : void
++ editRecipientData() : void
 
-- podajDaneNowegoAdresata() : Adresat
-- zamienPierwszaLitereNaDuzaAPozostaleNaMale() : String
-- wyswietlDaneAdresata() : void
-- wyswietlIloscWyszukanychAdresatow(int iloscAdresatow);
-- wybierzDaneDoEdycji() : void
-- idUsunietegoAdresata : Integer</panel_attributes>
+- enterNewRecipientDetails() : Recipient
+- convertTheFirstLetterToUppercaseAndRestToLowercase() : String
+- viewRecipientData() : void
+- viewTheNumberOfRecipientsFound(int numberOfRecipients);
+- chooseDataToEdit() : void
+- idOfRemovedRecipient : Integer</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>693</x>
+      <x>686</x>
       <y>532</y>
       <w>371</w>
-      <h>224</h>
+      <h>217</h>
     </coordinates>
-    <panel_attributes>PlikZAdresatami
+    <panel_attributes>FileWithRecipients
 --
-- idOstatniegoAdresata : Integer
-- idUsunietegoAdresata : Integer
+- idOfLastRecipient : Integer
+- idOfRemovedRecipient : Integer
 --
-+ PlikZAdresatami()
-+ dopiszAdresataDoPliku() : void
-+ wczytajAdresatowZalogowanegoUzytkownikaZPliku() : vector&lt;Adresat&gt;
-+ pobierzIdOstatniegoAdresata() : Integer
-+ usunAdresataZPliku() : void
-+ zmienDaneAdresataWPliku() : void
-+ pobierzIdUsunietegoAdresata() : Integer
-+ ustawIdUsunietegoAdresata() : void
++ FileWithRecipients()
++ addRecipientToFile() : void
++ loadRecipientsOfTheLoggedInUser() : vector&lt;Adresat&gt;
++ getIdOfLastRecipient() : Integer
++ removeRecipientFromFile() : void
++ editRecipientDataInFile() : void
++ getIdOfRemovedRecipient() : Integer
++ setIfOfRemovedRecipient() : void
 
-- policzWszystkichAdresatow() : Integer
-- pobierzIdAdresataZDanychOddzielonychPionowymiKreskami() : Integer
-- zamienDaneAdresataNaLinieZDanymiOddzielonymiPionowymiKreskami() : String
-- pobierzIdUzytkownikaZDanychOddzielonychPionowymiKreskami() : Integer
-- pobierzDaneAdresata() : Adresat
+- countAllRecipients() : Integer
+- getIdOfRecipientFromDataSeparatedByVerticalLines() : Integer
+- changeRecipientDataToLineWithDataSeparatedByVerticalLines() : String
+- getIdOfUserFromDataSeparatedByVerticalLines() : Integer
+- getRecipientData() : Recipient
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1148</x>
+      <x>1141</x>
       <y>420</y>
       <w>154</w>
       <h>77</h>
     </coordinates>
     <panel_attributes>PlikTekstowy
 -
-- NAZWA_PLIKU : Const String
+- FILE_NAME : Const String
 -
-+ PlikTekstowy()
-+ pobierzNazwePliku() : String
-+ czyPlikJestPusty() : Bool</panel_attributes>
++ TxtFile()
++ getNameOfFile() : String
++ isTheFileEmpty() : Bool</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>245</x>
+      <x>238</x>
       <y>329</y>
       <w>147</w>
       <h>77</h>
@@ -228,7 +228,7 @@ _+ konwersjaStringNaInt() : Integer_</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>252</x>
+      <x>245</x>
       <y>630</y>
       <w>140</w>
       <h>77</h>
@@ -239,7 +239,7 @@ _+ konwersjaStringNaInt() : Integer_</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>616</x>
+      <x>609</x>
       <y>742</y>
       <w>21</w>
       <h>56</h>
@@ -250,7 +250,7 @@ _+ konwersjaStringNaInt() : Integer_</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>574</x>
+      <x>567</x>
       <y>196</y>
       <w>21</w>
       <h>126</h>
@@ -261,7 +261,7 @@ _+ konwersjaStringNaInt() : Integer_</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>707</x>
+      <x>700</x>
       <y>196</y>
       <w>21</w>
       <h>77</h>
@@ -272,18 +272,18 @@ _+ konwersjaStringNaInt() : Integer_</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>707</x>
-      <y>749</y>
+      <x>700</x>
+      <y>742</y>
       <w>21</w>
-      <h>49</h>
+      <h>56</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>595</x>
+      <x>588</x>
       <y>441</y>
       <w>112</w>
       <h>21</h>
@@ -294,7 +294,7 @@ _+ konwersjaStringNaInt() : Integer_</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>763</x>
+      <x>756</x>
       <y>371</y>
       <w>21</w>
       <h>56</h>
@@ -305,7 +305,7 @@ _+ konwersjaStringNaInt() : Integer_</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>763</x>
+      <x>756</x>
       <y>490</y>
       <w>21</w>
       <h>56</h>
@@ -316,7 +316,7 @@ _+ konwersjaStringNaInt() : Integer_</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1155</x>
+      <x>1148</x>
       <y>308</y>
       <w>70</w>
       <h>126</h>
@@ -327,7 +327,7 @@ _+ konwersjaStringNaInt() : Integer_</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1057</x>
+      <x>1050</x>
       <y>490</y>
       <w>168</w>
       <h>98</h>
@@ -338,7 +338,7 @@ _+ konwersjaStringNaInt() : Integer_</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>637</x>
+      <x>630</x>
       <y>476</y>
       <w>70</w>
       <h>119</h>
